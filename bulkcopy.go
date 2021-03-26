@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/denisenkom/go-mssqldb/internal/decimal"
+	"github.com/grafana/go-mssqldb/internal/decimal"
 )
 
 type Bulk struct {
