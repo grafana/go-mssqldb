@@ -9,8 +9,8 @@ import (
 	"log"
 	"time"
 
-	mssql "github.com/grafana/go-mssqldb"
 	"github.com/golang-sql/civil"
+	mssql "github.com/grafana/go-mssqldb"
 )
 
 // This example shows how to insert and retrieve date and time types data
