@@ -511,7 +511,7 @@ END;
 // incorrect. Furthermore, the Data Race Detector would detect a data race because the output
 // variable is shared between the driver and the client application.
 //
-// Issue https://github.com/grafana/go-mssqldb/issues/378
+// Issue https://github.com/denisenkom/go-mssqldb/issues/378
 func TestOutputParamWithRows(t *testing.T) {
 	sqltextcreate := `
 	CREATE PROCEDURE spwithoutputandrows
