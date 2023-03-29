@@ -847,7 +847,7 @@ type auth interface {
 func dialConnection(ctx context.Context, c *Connector, p connectParams) (conn net.Conn, err error) {
 	// if the dialer has been updated, the dialer may be proxying to a different network, and so the
 	// dialer should be used to connect so the DNS is resolved within the right network
-	if c.Dialer != nil {
+	if c != nil && c.Dialer != nil {
 		d := c.getDialer(&p)
 		addr := net.JoinHostPort(p.host, strconv.Itoa(int(resolveServerPort(p.port))))
 		return d.DialContext(ctx, "tcp", addr)
