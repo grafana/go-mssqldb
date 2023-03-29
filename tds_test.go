@@ -616,6 +616,7 @@ func TestDialConnectionCustomDialer(t *testing.T) {
 	SetLogger(testLogger{t})
 
 	params := testConnParams(t)
+	params.host = "mssql"
 	connector, err := NewConnector(params.toUrl().String())
 	if err != nil {
 		t.Error(err)
