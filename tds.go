@@ -845,14 +845,13 @@ type auth interface {
 // list of IP addresses.  So if there is more than one, try them all and
 // use the first one that allows a connection.
 func dialConnection(ctx context.Context, c *Connector, p connectParams) (conn net.Conn, err error) {
-	// if the dialer has been updated, use the dialer before resolving the DNS. Otherwise,
-	// proxied connections where only the proxy can reach the network to resolve DNS, will fail.
+	// if the dialer has been updated, the dialer may be proxying to a different network, and so the
+	// dialer should be used to connect so the DNS is resolved within the right network
 	if c.Dialer != nil {
 		d := c.getDialer(&p)
 		addr := net.JoinHostPort(p.host, strconv.Itoa(int(resolveServerPort(p.port))))
 		return d.DialContext(ctx, "tcp", addr)
 	}
-
 	var ips []net.IP
 	ip := net.ParseIP(p.host)
 	if ip == nil {
