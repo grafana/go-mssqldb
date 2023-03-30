@@ -9,6 +9,7 @@ import (
 	"net/url"
 	"runtime"
 	"testing"
+	"time"
 )
 
 type MockTransport struct {
@@ -608,5 +609,43 @@ func runBatch(t testing.TB, p connectParams) {
 			t.Error("Invalid value returned, should be 1", value)
 			return
 		}
+	}
+}
+
+func TestDialConnectionCustomDialer(t *testing.T) {
+	SetLogger(testLogger{t})
+
+	params := testConnParams(t)
+	params.host = "mssql"
+	connector, err := NewConnector(params.toUrl().String())
+	if err != nil {
+		t.Error(err)
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*30)
+	defer cancel()
+
+	// if a dialer is specified, the dialer should be used to make the connection
+	mock := NewMockTransportDialer(
+		[]string{},
+		[]string{},
+	)
+	connector.Dialer = mock
+	if mock.count != 0 {
+		t.Error("expecting no connections")
+	}
+
+	conn, err := dialConnection(ctx, connector, params)
+	if err != nil {
+		t.Error(err)
+	}
+
+	if mock.count != 1 {
+		t.Error("expecting 1 connection")
+	}
+
+	err = conn.Close()
+	if err != nil {
+		t.Error(err)
 	}
 }
