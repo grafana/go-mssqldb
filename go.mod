@@ -8,7 +8,7 @@ require (
 	github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azkeys v1.0.1
 	github.com/golang-sql/civil v0.0.0-20220223132316-b832511892a9
 	github.com/golang-sql/sqlexp v0.1.0
-	github.com/jcmturner/gokrb5/v8 v8.4.4
+	github.com/grafana/gokrb5/v8 v8.0.0-20240530081837-d6c270e54f7f
 	github.com/stretchr/testify v1.9.0
 	golang.org/x/crypto v0.23.0
 	golang.org/x/sys v0.20.0
@@ -35,4 +35,4 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-replace github.com/jcmturner/gokrb5/v8 => github.com/grafana/gokrb5/v8 v8.0.0-20240530080420-1131e49f835c
+replace github.com/jcmturner/gokrb5/v8 => github.com/grafana/gokrb5/v8 v8.0.0-20240530081837-d6c270e54f7f

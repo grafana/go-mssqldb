@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/jcmturner/gokrb5/v8/config"
+	"github.com/grafana/gokrb5/v8/config"
 	"github.com/microsoft/go-mssqldb/msdsn"
 )
 
